@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обробка рядка</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff5f7;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(255, 105, 180, 0.2);
+            border: 1px solid #ffb6c1;
+        }
+        
+        h2 {
+            color: #ff69b4;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ffb6c1;
+    border-radius: 6px;
+    font-size: 16px;
+    background-color: #fffafb;
+    box-sizing: border-box;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #ff69b4;
+            background-color: #fff5f7;
+        }
+        
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        
+        button:hover {
+            background-color: #ff1493;
+        }
+        
+        .result {
+            padding: 15px;
+            background-color: #fff0f5;
+            border-radius: 6px;
+            border-left: 4px solid #ff69b4;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Обробка рядка</h2>
+        
+        <div class="input-group">
+            <input type="text" id="inputString" placeholder="Введіть рядок S...">
+        </div>
+
+        <div id="result" class="result hidden">
+            <strong>Результат:</strong> <span id="output"></span>
+        </div>
+    </div>
+
+    <script>
+        function processString() {
+            let S = document.getElementById('inputString').value;
+            
+            let letters = '';
+            let digits = '';
+
+            for (let i = 0; i < S.length; i++) {
+                let char = S.charAt(i);
+                
+                if ((char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z') || 
+                    char.toLowerCase() !== char.toUpperCase()) {
+                    letters += char;
+                }
+                else if (char >= '0' && char <= '9') {
+                    digits += char;
+                }
+            }
+
+            let result = letters + digits;
+            document.getElementById('output').textContent = result;
+            document.getElementById('result').classList.remove('hidden');
+            
+            console.log("Вихідний рядок: " + S);
+            console.log("Результат: " + result);
+        }
+
+        const button = document.createElement('button');
+        button.textContent = 'Обробити рядок';
+        button.addEventListener('click', processString);
+
+        document.querySelector('.input-group').after(button);
+    </script>
+</body>
+</html>
